@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Name It First · Can you name something nobody has?</title>
+  <meta name="description" content="Propose a name. If nobody on this site has ever proposed it, it's yours. If someone already did, see how many people thought of it too.">
+  <link rel="canonical" href="https://nameit.kdking-tools.com/">
+  <link rel="icon" type="image/png" href="icon.png">
+  <meta property="og:title" content="Name It First">
+  <meta property="og:description" content="Can you name something nobody has? Propose a name and find out.">
+  <meta property="og:image" content="https://nameit.kdking-tools.com/og.png">
+  <meta property="og:url" content="https://nameit.kdking-tools.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="./">Name It First</a>
+    <select id="lang" aria-label="Language"></select>
+  </header>
+  <main>
+    <h1 data-i18n="title">Can you name something nobody has?</h1>
+    <p class="tagline" data-i18n="tagline">Propose a name. If no one on this site has ever proposed it, it’s yours.</p>
+    <form id="form" autocomplete="off">
+      <input id="name" maxlength="80" aria-label="Name" data-i18n-placeholder="placeholder" placeholder="Type a name…">
+      <button id="submit" type="submit" data-i18n="submit">Claim it</button>
+    </form>
+    <section id="result" hidden aria-live="polite">
+      <h2 id="result-title"></h2>
+      <p id="result-body"></p>
+      <p id="result-note" class="note" hidden></p>
+    </section>
+    <p class="rule" data-i18n="rule">Names are compared exactly as typed: “Alice” and “alice” are different names. Each device counts once per name.</p>
+    <p id="stats" class="stats"></p>
+    <div id="ad" class="ad" hidden></div>
+  </main>
+  <footer>
+    <section class="explain" lang="en" dir="ltr">
+      <h2>What is Name It First?</h2>
+      <p>Name It First is a simple word game played by everyone who visits this site. Type any name, a pet name, a band name, a made-up word, a name for a star, and press the button. If nobody here has ever proposed exactly that name, you are the first, and the name is recorded as yours. If someone already proposed it, you will see how many times it has been proposed so far.</p>
+      <h2>How are names counted?</h2>
+      <p>Names are compared exactly as they are typed, so capital letters, spelling and character width all matter. Each device is counted once per name: trying the same name again from the same browser does not raise its count. No sign-up is needed.</p>
+      <p class="links"><a href="about.html">About &amp; FAQ</a> · <a href="privacy.html">Privacy Policy</a> · © Name It First</p>
+    </section>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

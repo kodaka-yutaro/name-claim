@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nameit.kdking-tools.com/sitemap.xml
