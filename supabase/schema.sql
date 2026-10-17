@@ -21,6 +21,7 @@ create table if not exists public.nc_proposals (
   primary key (name_id, device)
 );
 create index if not exists nc_proposals_device_time on public.nc_proposals (device, created_at);
+create index if not exists nc_names_first_device on public.nc_names (first_device);
 
 -- No policies: nobody reads or writes the tables except through the functions below.
 alter table public.nc_names     enable row level security;
@@ -64,9 +65,16 @@ begin
     'result', case when new_name then 'success' when row.first_device = me then 'yours' else 'taken' end,
     'name',   row.name,
     'count',  row.count,
-    'repeat', not new_name and counted = 0
+    'repeat', not new_name and counted = 0,
+    'wins',   (select count(*) from nc_names where first_device = me)
   );
 end;
+$$;
+
+-- How many names this device proposed first. Drives the trophy on the page.
+create or replace function public.nc_my_wins() returns integer
+language sql stable security definer set search_path = public as $$
+  select count(*)::integer from nc_names where first_device = auth.uid();
 $$;
 
 create or replace function public.nc_stats() returns json
@@ -76,5 +84,7 @@ $$;
 
 revoke all on function public.nc_propose(text) from public, anon;
 revoke all on function public.nc_stats() from public;
+revoke all on function public.nc_my_wins() from public, anon;
+grant execute on function public.nc_my_wins() to authenticated;
 grant execute on function public.nc_propose(text) to authenticated;
 grant execute on function public.nc_stats() to anon, authenticated;

@@ -19,9 +19,41 @@ a { color: var(--accent); }
 header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px; max-width: 720px; width: 100%; margin: 0 auto; }
 .logo { font-weight: 700; letter-spacing: .02em; color: var(--fg); text-decoration: none; }
 select { font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--fg); max-width: 50%; }
-main { flex: 1; max-width: 720px; width: 100%; margin: 0 auto; padding: 32px 16px; }
-h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; margin: 0 0 12px; text-wrap: balance; }
-.tagline { color: var(--muted); margin: 0 0 28px; font-size: 1.1rem; }
+main { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 8px 16px 40px; }
+.tools { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 1.1rem; font-weight: 700;
+  background: var(--card); color: var(--fg); border: 1px solid var(--line);
+}
+/* Trophy */
+.trophy { text-align: center; margin: 0 auto 20px; }
+.trophy-art { width: 170px; height: 170px; margin: 0 auto; }
+.trophy-art svg { width: 100%; height: 100%; overflow: visible; }
+.trophy-name { margin: 2px 0 0; font-weight: 700; font-size: 1.15rem; }
+.trophy-wins { margin: 0; color: var(--muted); font-size: .95rem; }
+.bar { width: 180px; height: 8px; margin: 10px auto 4px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.bar > div { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #f59f00, #ffd43b); transition: width .6s ease; }
+.trophy-next { margin: 0; color: var(--muted); font-size: .85rem; }
+.trophy.tier-0 .trophy-name { color: var(--muted); font-weight: 600; }
+.levelup-anim .trophy-art { animation: levelup 1s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes levelup { 0% { transform: scale(.4) rotate(-12deg); opacity: 0; } 60% { transform: scale(1.15) rotate(4deg); opacity: 1; } 100% { transform: none; } }
+.tr-rays { transform-origin: 100px 85px; animation: spin 18s linear infinite; }
+.tr-spark { transform-box: fill-box; transform-origin: center; animation: twinkle 1.8s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes twinkle { 0%, 100% { opacity: .2; transform: scale(.5); } 50% { opacity: 1; transform: scale(1); } }
+.levelup { margin: 0 0 6px !important; font-weight: 800; font-size: 1.05rem; }
+/* Help */
+dialog {
+  max-width: min(520px, calc(100vw - 32px)); border: 0; border-radius: 16px; padding: 20px 22px;
+  background: var(--card); color: var(--fg); box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+dialog::backdrop { background: rgba(0,0,0,.45); }
+dialog h2 { margin: 0 0 10px; font-size: 1.25rem; }
+dialog p { margin: 0 0 10px; line-height: 1.6; }
+dialog form { text-align: end; margin-top: 8px; }
+dialog form button { padding: 10px 20px; font-size: 1rem; }
+@media (prefers-reduced-motion: reduce) { .tr-rays, .tr-spark, .levelup-anim .trophy-art { animation: none; } }
+h1 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.2; margin: 0 0 20px; text-align: center; text-wrap: balance; }
 form { display: flex; gap: 8px; flex-wrap: wrap; }
 input {
   flex: 1 1 240px; min-width: 0; font: inherit; font-size: 1.2rem; padding: 14px 16px;
@@ -39,14 +71,9 @@ button:disabled { opacity: .6; cursor: wait; }
 #result.win { background: var(--win); color: var(--win-fg); }
 #result.fail, #result.error { background: var(--fail); color: var(--fail-fg); }
 .note { margin-top: 8px !important; font-size: .9rem; opacity: .85; }
-.rule { color: var(--muted); font-size: .85rem; margin-top: 28px; }
-.stats { color: var(--muted); font-size: .95rem; font-weight: 600; }
+.stats { color: var(--muted); font-size: .9rem; font-weight: 600; }
 .ad { margin: 32px 0 0; min-height: 100px; }
-footer { border-top: 1px solid var(--line); }
-.explain { max-width: 720px; margin: 0 auto; padding: 24px 16px 40px; color: var(--muted); font-size: .95rem; }
-.explain h2 { font-size: 1.05rem; color: var(--fg); margin: 16px 0 4px; }
-.explain p { margin: 0 0 8px; }
-.links { margin-top: 20px !important; }
+.links { margin-top: 14px !important; font-size: .9rem; }
 @keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: none; opacity: 1; } }
 /* About / privacy pages */
 .doc { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }

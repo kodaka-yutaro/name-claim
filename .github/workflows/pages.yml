@@ -25,10 +25,10 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp index.html about.html privacy.html app.js i18n.js config.js style.css icon.png og.png robots.txt sitemap.xml CNAME _site/
+          cp index.html about.html privacy.html app.js i18n.js trophy.js config.js style.css icon.png og.png robots.txt sitemap.xml CNAME _site/
           if [ -f ads.txt ]; then cp ads.txt _site/; fi
       - name: Make browsers fetch fresh files after each deploy
-        run: sed -i -E "s#(href|src)=\"(style\.css|config\.js|i18n\.js|app\.js)\"#\1=\"\2?v=${GITHUB_SHA::8}\"#g" _site/index.html
+        run: sed -i -E "s#(href|src)=\"(style\.css|config\.js|i18n\.js|trophy\.js|app\.js)\"#\1=\"\2?v=${GITHUB_SHA::8}\"#g" _site/index.html
       - uses: actions/configure-pages@v5
         with:
           enablement: true
