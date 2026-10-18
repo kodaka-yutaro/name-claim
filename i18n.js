@@ -45,7 +45,8 @@ window.I18N = {
       "Metropolis",
       "Megacity",
       "World capital"
-    ]
+    ],
+    "world": "names named around the world so far"
   },
   hi: {
     "label": "हिन्दी",
@@ -92,7 +93,8 @@ window.I18N = {
       "महानगर",
       "विशाल महानगर",
       "दुनिया की राजधानी"
-    ]
+    ],
+    "world": "अब तक दुनिया भर में रखे गए नाम"
   },
   es: {
     "label": "Español",
@@ -139,7 +141,8 @@ window.I18N = {
       "Metrópolis",
       "Megaciudad",
       "Capital del mundo"
-    ]
+    ],
+    "world": "nombres puestos en todo el mundo hasta ahora"
   },
   pt: {
     "label": "Português",
@@ -186,7 +189,8 @@ window.I18N = {
       "Metrópole",
       "Megacidade",
       "Capital do mundo"
-    ]
+    ],
+    "world": "nomes dados no mundo todo até agora"
   },
   fr: {
     "label": "Français",
@@ -233,7 +237,8 @@ window.I18N = {
       "Métropole",
       "Mégapole",
       "Capitale du monde"
-    ]
+    ],
+    "world": "noms donnés dans le monde jusqu’à présent"
   },
   de: {
     "label": "Deutsch",
@@ -280,7 +285,8 @@ window.I18N = {
       "Metropole",
       "Megastadt",
       "Welthauptstadt"
-    ]
+    ],
+    "world": "Namen weltweit bisher vergeben"
   },
   ja: {
     "label": "日本語",
@@ -327,7 +333,8 @@ window.I18N = {
       "メトロポリス",
       "メガシティ",
       "世界の首都"
-    ]
+    ],
+    "world": "これまで世界中でつけられた名前"
   },
   zh: {
     "label": "中文",
@@ -374,7 +381,8 @@ window.I18N = {
       "大都会",
       "超级都市",
       "世界之都"
-    ]
+    ],
+    "world": "迄今全世界起过的名字"
   },
   ar: {
     "label": "العربية",
@@ -422,7 +430,8 @@ window.I18N = {
       "حاضرة",
       "مدينة عملاقة",
       "عاصمة العالم"
-    ]
+    ],
+    "world": "اسمًا اختير حول العالم حتى الآن"
   },
   id: {
     "label": "Bahasa Indonesia",
@@ -469,7 +478,8 @@ window.I18N = {
       "Metropolitan",
       "Megakota",
       "Ibu kota dunia"
-    ]
+    ],
+    "world": "nama yang sudah dibuat di seluruh dunia"
   },
   ru: {
     "label": "Русский",
@@ -516,6 +526,7 @@ window.I18N = {
       "Мегаполис",
       "Мегагород",
       "Столица мира"
-    ]
+    ],
+    "world": "имён придумано по всему миру"
   },
 };

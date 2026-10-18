@@ -105,11 +105,29 @@
     if (!error) setWins(data);
   }
 
+  // The worldwide total counts up to its new value instead of jumping.
+  let worldShown = null;
+  function showWorld(target) {
+    const from = worldShown ?? Math.floor(target * 0.9);
+    const start = performance.now(), dur = from === target ? 0 : 900;
+    const step = (now) => {
+      const p = dur ? Math.min(1, (now - start) / dur) : 1;
+      $('world-num').textContent = fmt(Math.round(from + (target - from) * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    worldShown = target;
+    requestAnimationFrame(step);
+  }
+
   async function loadStats() {
     if (!sb) return;
     const { data } = await sb.rpc('nc_stats');
-    if (data) $('stats').textContent = t('stats', { names: fmt(data.names), proposals: fmt(data.proposals) });
+    if (!data) return;
+    $('stats').textContent = t('stats', { names: fmt(data.names), proposals: fmt(data.proposals) });
+    $('world').hidden = false;
+    showWorld(Number(data.names));
   }
+  setInterval(() => { if (!document.hidden) loadStats(); }, 30000);
 
   $('form').onsubmit = async (e) => {
     e.preventDefault();
