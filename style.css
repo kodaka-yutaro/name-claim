@@ -54,6 +54,19 @@ main { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 8px 16px
 .tw-firework { opacity: 0; animation: firework 3s ease-out infinite; }
 @keyframes firework { 0% { opacity: 0; transform: scale(.2); } 15% { opacity: 1; } 60% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.15); } }
 .levelup { margin: 0 0 6px !important; font-weight: 800; font-size: 1.05rem; }
+/* Residents & share */
+.town-actions { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+.chip { font-size: .9rem; font-weight: 600; padding: 7px 14px; border-radius: 99px; background: var(--card); color: var(--fg); border: 1px solid var(--line); }
+.muted { color: var(--muted); font-weight: 600; font-size: .95rem; }
+.residents-list { margin: 0; padding: 0; list-style: none; max-height: 55vh; overflow-y: auto; }
+.residents-list li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 2px; border-bottom: 1px solid var(--line); }
+.residents-list li span:first-child { overflow-wrap: anywhere; font-weight: 600; }
+.residents-list li span:last-child { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+.share-img { display: block; width: 100%; border-radius: 12px; background: var(--line); aspect-ratio: 1200 / 630; }
+.share-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.share-actions > * { flex: 1 1 140px; text-align: center; }
+.btn { display: inline-block; font-weight: 600; padding: 12px 18px; border-radius: 12px; background: var(--accent); color: #fff; text-decoration: none; }
+.btn-sub { background: var(--line) !important; color: var(--fg) !important; }
 /* Help */
 dialog {
   max-width: min(520px, calc(100vw - 32px)); border: 0; border-radius: 16px; padding: 20px 22px;
@@ -62,7 +75,8 @@ dialog {
 dialog::backdrop { background: rgba(0,0,0,.45); }
 dialog h2 { margin: 0 0 10px; font-size: 1.25rem; }
 dialog p { margin: 0 0 10px; line-height: 1.6; }
-dialog form { text-align: end; margin-top: 8px; }
+dialog form { justify-content: flex-end; margin-top: 8px; }
+#residents { width: min(420px, calc(100vw - 32px)); }
 dialog form button { padding: 10px 20px; font-size: 1rem; }
 @media (prefers-reduced-motion: reduce) { .town-art * , .grow-anim .town-art { animation: none !important; } }
 h1 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.2; margin: 0 0 20px; text-align: center; text-wrap: balance; }

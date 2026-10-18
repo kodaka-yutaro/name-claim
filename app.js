@@ -97,6 +97,106 @@
     return grew;
   }
 
+  // Residents: the names this device claimed first. The server list wins; the local copy
+  // covers databases that don't have nc_my_names yet.
+  const localResidents = () => { try { return JSON.parse(store.get('residents')) || []; } catch { return []; } };
+  function addResident(name) {
+    const list = localResidents().filter((r) => r.name !== name);
+    list.unshift({ name, count: 1 });
+    store.set('residents', JSON.stringify(list.slice(0, 1000)));
+  }
+
+  async function openResidents() {
+    let list = localResidents();
+    if (sb) {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        const { data, error } = await sb.rpc('nc_my_names');
+        if (!error && Array.isArray(data)) list = data;
+      }
+    }
+    const ol = $('residents-list');
+    ol.replaceChildren(...list.map((r) => {
+      const li = document.createElement('li');
+      const a = document.createElement('span'), b = document.createElement('span');
+      a.textContent = r.name;
+      b.textContent = t('times', { n: fmt(r.count) });
+      li.append(a, b);
+      return li;
+    }));
+    $('residents-count').textContent = fmt(Math.max(wins, list.length));
+    $('residents-empty').hidden = list.length > 0;
+    $('residents').showModal();
+  }
+  $('residents-open').onclick = openResidents;
+
+  // Share card: the town plus its name and population, drawn on a 1200×630 canvas.
+  function townImage() {
+    const src = Town.svg(wins).replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" width="756" height="630" ');
+    return new Promise((ok, fail) => {
+      const img = new Image();
+      img.onload = () => ok(img);
+      img.onerror = fail;
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src);
+    });
+  }
+
+  function fitText(ctx, text, max, size, weight) {
+    do ctx.font = `${weight} ${size}px system-ui, -apple-system, "Segoe UI", "Noto Sans", "Noto Sans JP", sans-serif`;
+    while (ctx.measureText(text).width > max && --size > 12);
+  }
+
+  async function shareCard() {
+    const c = document.createElement('canvas');
+    c.width = 1200; c.height = 630;
+    const ctx = c.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, 1200, 630);
+    g.addColorStop(0, '#1b2a6b'); g.addColorStop(1, '#0b6e5a');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, 1200, 630);
+    ctx.drawImage(await townImage(), 0, 0);
+    const stage = Town.stageOf(wins);
+    const names = I18N[lang].stages || I18N.en.stages;
+    const x = 978, w = 400;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,.75)';
+    fitText(ctx, 'Lv.' + stage, w, 34, 700);
+    ctx.fillText('Lv.' + stage, x, 200);
+    ctx.fillStyle = '#fff';
+    fitText(ctx, names[stage], w, 56, 800);
+    ctx.fillText(names[stage], x, 270);
+    fitText(ctx, fmt(wins), w, 110, 900);
+    ctx.fillText(fmt(wins), x, 390);
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
+    const pop = t('wins', { n: fmt(wins) });
+    fitText(ctx, pop, w, 30, 600);
+    ctx.fillText(pop, x, 440);
+    ctx.fillStyle = 'rgba(255,255,255,.7)';
+    fitText(ctx, 'Name It First · nameit.kdking-tools.com', w, 24, 600);
+    ctx.fillText('Name It First · nameit.kdking-tools.com', x, 580);
+    return new Promise((ok) => c.toBlob(ok, 'image/png'));
+  }
+
+  const SITE = 'https://nameit.kdking-tools.com/';
+  let shareFile = null;
+  $('share-open').onclick = async () => {
+    const names = I18N[lang].stages || I18N.en.stages;
+    const text = t('share_text', { town: names[Town.stageOf(wins)], n: fmt(wins) });
+    $('share-x').href = 'https://x.com/intent/tweet?' + new URLSearchParams({ text, url: SITE });
+    $('share-img').removeAttribute('src');
+    $('share').showModal();
+    try {
+      const blob = await shareCard();
+      shareFile = new File([blob], 'my-town.png', { type: 'image/png' });
+      const url = URL.createObjectURL(blob);
+      $('share-img').src = url;
+      $('share-save').href = url;
+      $('share-native').hidden = !(navigator.canShare && navigator.canShare({ files: [shareFile] }));
+      $('share-native').onclick = () => navigator.share({ files: [shareFile], text: text + ' ' + SITE }).catch(() => {});
+    } catch (err) { console.warn(err); }
+  };
+  for (const id of ['residents', 'share']) $(id).onclick = (e) => { if (e.target === $(id)) $(id).close(); };
+
   async function loadWins() {
     if (!sb) return;
     const { data: { session } } = await sb.auth.getSession();
@@ -143,6 +243,7 @@
       const { data, error } = await sb.rpc('nc_propose', { p_name: name });
       if (error) throw error;
       // Older databases don't return wins yet; count successes locally until they do.
+      if (data.result === 'success') addResident(data.name);
       const grew = setWins(data.wins ?? (data.result === 'success' ? wins + 1 : wins));
       render(data);
       const news = [data.result === 'success' && '🏠 ' + t('moved_in', { name: data.name }), grew && '🎉 ' + t('levelup')].filter(Boolean);

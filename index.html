@@ -33,6 +33,10 @@
       <p class="town-line"><strong id="town-name"></strong> · <span id="town-pop"></span></p>
       <div class="bar"><div id="town-bar"></div></div>
       <p id="town-next" class="town-next"></p>
+      <div class="town-actions">
+        <button id="residents-open" class="chip" type="button">👥 <span data-i18n="residents">Residents</span></button>
+        <button id="share-open" class="chip" type="button">📣 <span data-i18n="share">Share</span></button>
+      </div>
     </section>
     <h1 data-i18n="title">Can you name something nobody has?</h1>
     <form id="form" autocomplete="off">
@@ -56,6 +60,23 @@
     <p id="stats" class="stats"></p>
     <p class="links"><a href="about.html" data-i18n="about">About &amp; FAQ</a> · <a href="privacy.html" data-i18n="privacy">Privacy Policy</a></p>
     <form method="dialog"><button data-i18n="close">Close</button></form>
+  </dialog>
+
+  <dialog id="residents">
+    <h2>👥 <span data-i18n="residents">Residents</span> <span id="residents-count" class="muted"></span></h2>
+    <p id="residents-empty" data-i18n="residents_empty" hidden></p>
+    <ol id="residents-list" class="residents-list"></ol>
+    <form method="dialog"><button data-i18n="close">Close</button></form>
+  </dialog>
+
+  <dialog id="share">
+    <img id="share-img" class="share-img" alt="">
+    <div class="share-actions">
+      <button id="share-native" type="button" data-i18n="share" hidden>Share</button>
+      <a id="share-x" class="btn" target="_blank" rel="noopener" data-i18n="post_x">Post on X</a>
+      <a id="share-save" class="btn btn-sub" download="my-town.png" data-i18n="save_image">Save image</a>
+    </div>
+    <form method="dialog"><button class="btn-sub" data-i18n="close">Close</button></form>
   </dialog>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.js"></script>

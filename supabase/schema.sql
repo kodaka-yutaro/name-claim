@@ -77,6 +77,14 @@ language sql stable security definer set search_path = public as $$
   select count(*)::integer from nc_names where first_device = auth.uid();
 $$;
 
+-- The names this device claimed first: its town's residents, newest first.
+create or replace function public.nc_my_names() returns json
+language sql stable security definer set search_path = public as $$
+  select coalesce(json_agg(json_build_object('name', name, 'count', count) order by created_at desc), '[]'::json)
+  from (select name, count, created_at from nc_names where first_device = auth.uid()
+        order by created_at desc limit 1000) t;
+$$;
+
 create or replace function public.nc_stats() returns json
 language sql stable security definer set search_path = public as $$
   select json_build_object('names', count(*), 'proposals', coalesce(sum(count), 0)) from nc_names;
@@ -86,5 +94,7 @@ revoke all on function public.nc_propose(text) from public, anon;
 revoke all on function public.nc_stats() from public;
 revoke all on function public.nc_my_wins() from public, anon;
 grant execute on function public.nc_my_wins() to authenticated;
+revoke all on function public.nc_my_names() from public, anon;
+grant execute on function public.nc_my_names() to authenticated;
 grant execute on function public.nc_propose(text) to authenticated;
 grant execute on function public.nc_stats() to anon, authenticated;

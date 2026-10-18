@@ -46,7 +46,14 @@ window.I18N = {
       "Megacity",
       "World capital"
     ],
-    "world": "names named around the world so far"
+    "world": "names named around the world so far",
+    "residents": "Residents",
+    "share": "Share",
+    "residents_empty": "No residents yet. Claim a name nobody has thought of!",
+    "times": "Proposed {n}×",
+    "share_text": "My town “{town}” has {n} residents. Can you name something nobody has?",
+    "post_x": "Post on X",
+    "save_image": "Save image"
   },
   hi: {
     "label": "हिन्दी",
@@ -94,7 +101,14 @@ window.I18N = {
       "विशाल महानगर",
       "दुनिया की राजधानी"
     ],
-    "world": "अब तक दुनिया भर में रखे गए नाम"
+    "world": "अब तक दुनिया भर में रखे गए नाम",
+    "residents": "निवासी",
+    "share": "शेयर",
+    "residents_empty": "अभी कोई निवासी नहीं। ऐसा नाम दें जो किसी ने नहीं सोचा!",
+    "times": "{n} बार प्रस्तावित",
+    "share_text": "मेरे शहर “{town}” में {n} निवासी हैं। क्या आप ऐसा नाम दे सकते हैं जो किसी ने नहीं दिया?",
+    "post_x": "X पर पोस्ट करें",
+    "save_image": "इमेज सेव करें"
   },
   es: {
     "label": "Español",
@@ -142,7 +156,14 @@ window.I18N = {
       "Megaciudad",
       "Capital del mundo"
     ],
-    "world": "nombres puestos en todo el mundo hasta ahora"
+    "world": "nombres puestos en todo el mundo hasta ahora",
+    "residents": "Habitantes",
+    "share": "Compartir",
+    "residents_empty": "Aún no hay habitantes. ¡Reclama un nombre que nadie haya pensado!",
+    "times": "Propuesto {n}×",
+    "share_text": "Mi ciudad “{town}” tiene {n} habitantes. ¿Puedes poner un nombre que nadie haya puesto?",
+    "post_x": "Publicar en X",
+    "save_image": "Guardar imagen"
   },
   pt: {
     "label": "Português",
@@ -190,7 +211,14 @@ window.I18N = {
       "Megacidade",
       "Capital do mundo"
     ],
-    "world": "nomes dados no mundo todo até agora"
+    "world": "nomes dados no mundo todo até agora",
+    "residents": "Moradores",
+    "share": "Compartilhar",
+    "residents_empty": "Ainda sem moradores. Reivindique um nome que ninguém pensou!",
+    "times": "Proposto {n}×",
+    "share_text": "Minha cidade “{town}” tem {n} moradores. Você consegue dar um nome que ninguém deu?",
+    "post_x": "Postar no X",
+    "save_image": "Salvar imagem"
   },
   fr: {
     "label": "Français",
@@ -238,7 +266,14 @@ window.I18N = {
       "Mégapole",
       "Capitale du monde"
     ],
-    "world": "noms donnés dans le monde jusqu’à présent"
+    "world": "noms donnés dans le monde jusqu’à présent",
+    "residents": "Habitants",
+    "share": "Partager",
+    "residents_empty": "Pas encore d’habitants. Revendiquez un nom auquel personne n’a pensé !",
+    "times": "Proposé {n}×",
+    "share_text": "Ma ville « {town} » compte {n} habitants. Saurez-vous trouver un nom que personne n’a donné ?",
+    "post_x": "Publier sur X",
+    "save_image": "Enregistrer l’image"
   },
   de: {
     "label": "Deutsch",
@@ -286,7 +321,14 @@ window.I18N = {
       "Megastadt",
       "Welthauptstadt"
     ],
-    "world": "Namen weltweit bisher vergeben"
+    "world": "Namen weltweit bisher vergeben",
+    "residents": "Einwohner",
+    "share": "Teilen",
+    "residents_empty": "Noch keine Einwohner. Sichere dir einen Namen, an den noch niemand gedacht hat!",
+    "times": "{n}× vorgeschlagen",
+    "share_text": "Meine Stadt „{town}“ hat {n} Einwohner. Findest du einen Namen, den noch niemand vergeben hat?",
+    "post_x": "Auf X posten",
+    "save_image": "Bild speichern"
   },
   ja: {
     "label": "日本語",
@@ -334,7 +376,14 @@ window.I18N = {
       "メガシティ",
       "世界の首都"
     ],
-    "world": "これまで世界中でつけられた名前"
+    "world": "これまで世界中でつけられた名前",
+    "residents": "住人名簿",
+    "share": "シェア",
+    "residents_empty": "まだ住人がいません。誰も思いつかない名前をつけてみよう！",
+    "times": "{n} 回提案",
+    "share_text": "わたしの街「{town}」の人口は {n} 人！誰もつけたことのない名前、思いつける？",
+    "post_x": "Xに投稿",
+    "save_image": "画像を保存"
   },
   zh: {
     "label": "中文",
@@ -382,7 +431,14 @@ window.I18N = {
       "超级都市",
       "世界之都"
     ],
-    "world": "迄今全世界起过的名字"
+    "world": "迄今全世界起过的名字",
+    "residents": "居民名册",
+    "share": "分享",
+    "residents_empty": "还没有居民。来想一个没人想到过的名字吧！",
+    "times": "被提出 {n} 次",
+    "share_text": "我的城市“{town}”已有 {n} 位居民！你能想出一个没人起过的名字吗？",
+    "post_x": "发布到 X",
+    "save_image": "保存图片"
   },
   ar: {
     "label": "العربية",
@@ -431,7 +487,14 @@ window.I18N = {
       "مدينة عملاقة",
       "عاصمة العالم"
     ],
-    "world": "اسمًا اختير حول العالم حتى الآن"
+    "world": "اسمًا اختير حول العالم حتى الآن",
+    "residents": "السكان",
+    "share": "مشاركة",
+    "residents_empty": "لا يوجد سكان بعد. اختر اسمًا لم يفكر فيه أحد!",
+    "times": "اقتُرح {n} مرة",
+    "share_text": "مدينتي «{town}» فيها {n} من السكان. هل يمكنك اختيار اسم لم يختره أحد؟",
+    "post_x": "انشر على X",
+    "save_image": "حفظ الصورة"
   },
   id: {
     "label": "Bahasa Indonesia",
@@ -479,7 +542,14 @@ window.I18N = {
       "Megakota",
       "Ibu kota dunia"
     ],
-    "world": "nama yang sudah dibuat di seluruh dunia"
+    "world": "nama yang sudah dibuat di seluruh dunia",
+    "residents": "Penduduk",
+    "share": "Bagikan",
+    "residents_empty": "Belum ada penduduk. Klaim nama yang belum pernah terpikirkan siapa pun!",
+    "times": "Diusulkan {n}×",
+    "share_text": "Kotaku “{town}” punya {n} penduduk. Bisakah kamu memberi nama yang belum pernah diberikan siapa pun?",
+    "post_x": "Posting di X",
+    "save_image": "Simpan gambar"
   },
   ru: {
     "label": "Русский",
@@ -527,6 +597,13 @@ window.I18N = {
       "Мегагород",
       "Столица мира"
     ],
-    "world": "имён придумано по всему миру"
+    "world": "имён придумано по всему миру",
+    "residents": "Жители",
+    "share": "Поделиться",
+    "residents_empty": "Пока нет жителей. Придумайте имя, которое никому не приходило в голову!",
+    "times": "Предложено {n}×",
+    "share_text": "В моём городе «{town}» уже {n} жителей. Сможете придумать имя, которого ещё ни у кого не было?",
+    "post_x": "Опубликовать в X",
+    "save_image": "Сохранить картинку"
   },
 };
