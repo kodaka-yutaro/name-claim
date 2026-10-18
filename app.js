@@ -28,7 +28,7 @@
     document.querySelectorAll('[data-i18n]').forEach((el) => (el.textContent = t(el.dataset.i18n)));
     document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => (el.placeholder = t(el.dataset.i18nPlaceholder)));
     if (last) render(last);
-    renderTrophy(false);
+    renderTown(false);
     loadStats();
   }
 
@@ -71,29 +71,30 @@
     $('result-note').textContent = note ? t('repeat_note') : '';
   }
 
-  // Trophy: how many names this device proposed first. The server's count wins;
+  // Town: every name this device proposed first is one resident. The server's count wins;
   // the cached copy only makes the first paint instant.
   let wins = Number(store.get('wins')) || 0;
 
-  function renderTrophy(animate) {
-    const tier = Trophy.tierOf(wins);
-    const next = Trophy.TIERS[tier + 1];
-    const prev = Trophy.TIERS[tier];
-    $('trophy-art').innerHTML = Trophy.svg(tier);
-    $('trophy').className = 'trophy tier-' + tier + (animate ? ' levelup-anim' : '');
-    $('trophy-name').textContent = (I18N[lang].tiers || I18N.en.tiers)[tier];
-    $('trophy-wins').textContent = t('wins', { n: fmt(wins) });
-    $('trophy-bar').style.width = next ? ((wins - prev) / (next - prev)) * 100 + '%' : '100%';
-    $('trophy-next').textContent = next ? t('next', { left: fmt(next - wins) }) : t('top');
+  function renderTown(animate) {
+    const stage = Town.stageOf(wins);
+    const next = Town.STAGES[stage + 1];
+    const prev = Town.STAGES[stage];
+    const names = I18N[lang].stages || I18N.en.stages;
+    $('town-art').innerHTML = Town.svg(wins);
+    $('town').className = 'town' + (animate ? ' grow-anim' : '');
+    $('town-name').textContent = names[stage];
+    $('town-pop').textContent = t('wins', { n: fmt(wins) });
+    $('town-bar').style.width = next ? ((wins - prev) / (next - prev)) * 100 + '%' : '100%';
+    $('town-next').textContent = next ? t('next', { left: fmt(next - wins), next: names[stage + 1] }) : t('top');
   }
 
   function setWins(n) {
     if (typeof n !== 'number' || n === wins) return false;
-    const leveled = Trophy.tierOf(n) > Trophy.tierOf(wins);
+    const grew = Town.stageOf(n) > Town.stageOf(wins);
     wins = n;
     store.set('wins', String(n));
-    renderTrophy(leveled);
-    return leveled;
+    renderTown(grew);
+    return grew;
   }
 
   async function loadWins() {
@@ -124,10 +125,11 @@
       const { data, error } = await sb.rpc('nc_propose', { p_name: name });
       if (error) throw error;
       // Older databases don't return wins yet; count successes locally until they do.
-      const leveled = setWins(data.wins ?? (data.result === 'success' ? wins + 1 : wins));
+      const grew = setWins(data.wins ?? (data.result === 'success' ? wins + 1 : wins));
       render(data);
-      $('result-levelup').hidden = !leveled;
-      $('result-levelup').textContent = leveled ? '🏆 ' + t('levelup') : '';
+      const news = [data.result === 'success' && '🏠 ' + t('moved_in', { name: data.name }), grew && '🎉 ' + t('levelup')].filter(Boolean);
+      $('result-levelup').hidden = !news.length;
+      $('result-levelup').textContent = news.join('  ');
       if (!data.error) loadStats();
     } catch (err) {
       console.warn(err);

@@ -25,22 +25,32 @@ main { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 8px 16px
   width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 1.1rem; font-weight: 700;
   background: var(--card); color: var(--fg); border: 1px solid var(--line);
 }
-/* Trophy */
-.trophy { text-align: center; margin: 0 auto 20px; }
-.trophy-art { width: 170px; height: 170px; margin: 0 auto; }
-.trophy-art svg { width: 100%; height: 100%; overflow: visible; }
-.trophy-name { margin: 2px 0 0; font-weight: 700; font-size: 1.15rem; }
-.trophy-wins { margin: 0; color: var(--muted); font-size: .95rem; }
-.bar { width: 180px; height: 8px; margin: 10px auto 4px; border-radius: 99px; background: var(--line); overflow: hidden; }
-.bar > div { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #f59f00, #ffd43b); transition: width .6s ease; }
-.trophy-next { margin: 0; color: var(--muted); font-size: .85rem; }
-.trophy.tier-0 .trophy-name { color: var(--muted); font-weight: 600; }
-.levelup-anim .trophy-art { animation: levelup 1s cubic-bezier(.2, 1.6, .4, 1); }
-@keyframes levelup { 0% { transform: scale(.4) rotate(-12deg); opacity: 0; } 60% { transform: scale(1.15) rotate(4deg); opacity: 1; } 100% { transform: none; } }
-.tr-rays { transform-origin: 100px 85px; animation: spin 18s linear infinite; }
-.tr-spark { transform-box: fill-box; transform-origin: center; animation: twinkle 1.8s ease-in-out infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes twinkle { 0%, 100% { opacity: .2; transform: scale(.5); } 50% { opacity: 1; transform: scale(1); } }
+/* Town */
+.town { text-align: center; margin: 0 auto 20px; }
+.town-art { width: 100%; aspect-ratio: 360 / 200; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+.town-art svg { width: 100%; height: 100%; display: block; }
+.town-line { margin: 10px 0 0; font-size: 1.05rem; }
+.town-line strong { font-size: 1.15rem; }
+.bar { width: 200px; height: 8px; margin: 8px auto 4px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.bar > div { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, #40c057, #94d82d); transition: width .6s ease; }
+.town-next { margin: 0; color: var(--muted); font-size: .85rem; }
+.grow-anim .town-art { animation: grow .9s cubic-bezier(.2, 1.4, .4, 1); }
+@keyframes grow { 0% { transform: scale(.92); filter: brightness(1.6); } 100% { transform: none; filter: none; } }
+.tw-walk { animation: walk linear infinite; }
+.tw-walk-rev { animation: walk-rev linear infinite; }
+.tw-drive { animation: walk linear infinite; }
+.tw-drive-rev { animation: walk-rev linear infinite; }
+@keyframes walk { from { transform: translateX(-20px); } to { transform: translateX(380px); } }
+@keyframes walk-rev { from { transform: translateX(380px) scaleX(-1); } to { transform: translateX(-20px) scaleX(-1); } }
+.tw-cloud { animation: cloud 70s linear infinite; }
+@keyframes cloud { from { transform: translateX(-120px); } to { transform: translateX(380px); } }
+.tw-blink { animation: blink 1.6s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .15; } }
+.tw-fire { animation: blink .5s ease-in-out infinite alternate; }
+.tw-beam { animation: beam 6s ease-in-out infinite alternate; }
+@keyframes beam { from { transform: rotate(-25deg); } to { transform: rotate(25deg); } }
+.tw-firework { opacity: 0; animation: firework 3s ease-out infinite; }
+@keyframes firework { 0% { opacity: 0; transform: scale(.2); } 15% { opacity: 1; } 60% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.15); } }
 .levelup { margin: 0 0 6px !important; font-weight: 800; font-size: 1.05rem; }
 /* Help */
 dialog {
@@ -52,7 +62,7 @@ dialog h2 { margin: 0 0 10px; font-size: 1.25rem; }
 dialog p { margin: 0 0 10px; line-height: 1.6; }
 dialog form { text-align: end; margin-top: 8px; }
 dialog form button { padding: 10px 20px; font-size: 1rem; }
-@media (prefers-reduced-motion: reduce) { .tr-rays, .tr-spark, .levelup-anim .trophy-art { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .town-art * , .grow-anim .town-art { animation: none !important; } }
 h1 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.2; margin: 0 0 20px; text-align: center; text-wrap: balance; }
 form { display: flex; gap: 8px; flex-wrap: wrap; }
 input {

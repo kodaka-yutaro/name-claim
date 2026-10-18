@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Name It First · Can you name something nobody has?</title>
-  <meta name="description" content="Propose a name. If nobody on this site has ever proposed it, it's yours, and your trophy grows. If someone already did, see how many people thought of it too.">
+  <meta name="description" content="Propose a name. If nobody on this site has ever proposed it, it's yours and moves into your town. If someone already did, see how many people thought of it too.">
   <link rel="canonical" href="https://nameit.kdking-tools.com/">
   <link rel="icon" type="image/png" href="icon.png">
   <meta property="og:title" content="Name It First">
@@ -23,12 +23,11 @@
     </div>
   </header>
   <main>
-    <section id="trophy" class="trophy" aria-live="polite">
-      <div id="trophy-art" class="trophy-art"></div>
-      <p id="trophy-name" class="trophy-name"></p>
-      <p id="trophy-wins" class="trophy-wins"></p>
-      <div class="bar"><div id="trophy-bar"></div></div>
-      <p id="trophy-next" class="trophy-next"></p>
+    <section id="town" class="town" aria-live="polite">
+      <div id="town-art" class="town-art"></div>
+      <p class="town-line"><strong id="town-name"></strong> · <span id="town-pop"></span></p>
+      <div class="bar"><div id="town-bar"></div></div>
+      <p id="town-next" class="town-next"></p>
     </section>
     <h1 data-i18n="title">Can you name something nobody has?</h1>
     <form id="form" autocomplete="off">
@@ -48,7 +47,7 @@
     <h2 data-i18n="help_title">How it works</h2>
     <p data-i18n="help_1">Type any name and press the button. If nobody on this site has ever proposed exactly that name, you win and it is recorded as yours. If someone already did, you see how many times it has been proposed.</p>
     <p data-i18n="rule">Names are compared exactly as typed: “Alice” and “alice” are different names. Each device counts once per name.</p>
-    <p data-i18n="help_3">Every name you claim first makes your trophy grander: bronze, silver, gold and beyond.</p>
+    <p data-i18n="help_3">Every name you claim first moves into your town as a new resident. The more residents you have, the bigger your town grows, from a lonely campfire to the capital of the world.</p>
     <p id="stats" class="stats"></p>
     <p class="links"><a href="about.html" data-i18n="about">About &amp; FAQ</a> · <a href="privacy.html" data-i18n="privacy">Privacy Policy</a></p>
     <form method="dialog"><button data-i18n="close">Close</button></form>
@@ -57,7 +56,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.115.0/dist/umd/supabase.js"></script>
   <script src="config.js"></script>
   <script src="i18n.js"></script>
-  <script src="trophy.js"></script>
+  <script src="town.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
