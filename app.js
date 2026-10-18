@@ -82,10 +82,10 @@
     const names = I18N[lang].stages || I18N.en.stages;
     $('town-art').innerHTML = Town.svg(wins);
     $('town').className = 'town' + (animate ? ' grow-anim' : '');
-    $('town-name').textContent = names[stage];
+    $('town-name').textContent = `Lv.${stage} ${names[stage]}`;
     $('town-pop').textContent = t('wins', { n: fmt(wins) });
     $('town-bar').style.width = next ? ((wins - prev) / (next - prev)) * 100 + '%' : '100%';
-    $('town-next').textContent = next ? t('next', { left: fmt(next - wins), next: names[stage + 1] }) : t('top');
+    $('town-next').textContent = next ? t('next', { left: fmt(next - wins) }) : t('top');
   }
 
   function setWins(n) {
