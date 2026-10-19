@@ -6,9 +6,10 @@
     set: (k, v) => { try { localStorage.setItem(k, v); } catch {} },
   };
 
-  // ?lang= > saved choice > browser language > English
+  // Language page (/ja/) > ?lang= > saved choice > browser language > English
+  const pathLang = (location.pathname.match(/^\/([a-z]{2})\//) || [])[1];
   function pickLang() {
-    const wanted = [new URLSearchParams(location.search).get('lang'), store.get('lang'), ...(navigator.languages || [navigator.language])];
+    const wanted = [pathLang, new URLSearchParams(location.search).get('lang'), store.get('lang'), ...(navigator.languages || [navigator.language])];
     for (const l of wanted) {
       const code = (l || '').toLowerCase().split('-')[0];
       if (I18N[code]) return code;
@@ -35,7 +36,11 @@
   const select = $('lang');
   for (const [code, { label }] of Object.entries(I18N)) select.add(new Option(label, code));
   select.value = lang;
-  select.onchange = () => { lang = select.value; store.set('lang', lang); applyLang(); };
+  select.onchange = () => {
+    store.set('lang', select.value);
+    // Move to that language's own page, so the address can be shared in that language.
+    location.href = (pathLang ? '../' : './') + (select.value === 'en' ? '' : select.value + '/');
+  };
 
   // Each browser gets a Supabase guest account; its id is what makes "one count per device".
   const sb = cfg.supabaseUrl && cfg.supabaseAnonKey && window.supabase
@@ -177,7 +182,7 @@
     return new Promise((ok) => c.toBlob(ok, 'image/png'));
   }
 
-  const SITE = 'https://nameit.kdking-tools.com/';
+  const SITE = 'https://nameit.kdking-tools.com/' + (lang === 'en' ? '' : lang + '/');
   let shareFile = null;
   $('share-open').onclick = async () => {
     const names = I18N[lang].stages || I18N.en.stages;
